@@ -1,0 +1,78 @@
+# Source dataset for the evidence table in README.md.
+# Run `python render_table.py --write` after editing to regenerate the table.
+#
+# Address verification is an evidence problem, not a lookup problem. Each method
+# below is rated on what it actually proves, how strong that proof is in front of
+# a regulator or a chargeback panel, and what lawful basis it needs.
+#
+# strength: 1 (weakest, self-asserted) to 5 (strongest, independently corroborated)
+# proves:   what a successful result establishes, stated narrowly
+# fails:    the specific way this method is wrong or defeated
+# basis:    the lawful basis or consent posture a business needs to use it
+#
+# This is not legal advice. Availability and legality of several methods vary by
+# jurisdiction. Corrections welcome via PR.
+
+methods:
+  - name: Self-declared entry
+    strength: 1
+    proves: "Nothing beyond what the user typed"
+    fails: "Any typo, any fabrication, no corroboration at all"
+    basis: "Contract performance"
+    latency: "Instant"
+
+  - name: Postal format validation
+    strength: 1
+    proves: "The string is a deliverable address that exists"
+    fails: "A real address the person has no connection to"
+    basis: "Contract performance"
+    latency: "Instant, API"
+
+  - name: AVS check at payment
+    strength: 2
+    proves: "The billing address matches what the card issuer holds"
+    fails: "Stolen card used with the real billing address; partial-match codes"
+    basis: "Fraud prevention, legitimate interest"
+    latency: "Instant, in the authorization"
+
+  - name: Credit header or reference data match
+    strength: 3
+    proves: "A name and address pair appears together in bureau records"
+    fails: "Thin-file and recently moved users; coverage drops sharply outside major markets"
+    basis: "Legitimate interest, permissible purpose under local credit rules"
+    latency: "Seconds, API"
+
+  - name: Government or registry record
+    strength: 4
+    proves: "An authoritative body records this address against this person or company"
+    fails: "Registry lag after a move; access limited or closed in many jurisdictions"
+    basis: "Legal obligation, or public-register access rules"
+    latency: "Seconds to days"
+
+  - name: Proof-of-address document
+    strength: 4
+    proves: "A named third party sent this person post at this address recently"
+    fails: "Edited PDFs and template forgeries; stale documents outside the date window"
+    basis: "Legal obligation under CDD"
+    latency: "Seconds automated, minutes with human review"
+
+  - name: Document plus identity binding
+    strength: 5
+    proves: "The person presenting the address document is the person named on it"
+    fails: "Coerced or complicit third party; a genuine tenant fronting for someone else"
+    basis: "Legal obligation under CDD"
+    latency: "Under a minute automated"
+
+  - name: Physical delivery confirmation
+    strength: 5
+    proves: "Something reached a human at that address"
+    fails: "Slow, expensive, and defeated by mail forwarding"
+    basis: "Contract performance"
+    latency: "Days to weeks"
+
+  - name: Geolocation and IP consistency
+    strength: 2
+    proves: "The session is consistent, or inconsistent, with the claimed location"
+    fails: "Proves the network path, never the residence; travel produces false alarms"
+    basis: "Fraud prevention, legitimate interest"
+    latency: "Instant"
