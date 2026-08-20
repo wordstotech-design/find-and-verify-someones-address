@@ -2,9 +2,11 @@
 
 <p align="center">
   <a href="https://www.idenfy.com/">
-    <img src="REPLACE_WITH_SCREENSHOT_URL" alt="find-and-verify-someones-address" />
+    <img src="https://github.com/user-attachments/assets/42b041d7-709f-4195-8283-1fbbdc7311d0" alt="find-and-verify-someones-address" />
   </a>
 </p>
+
+
 
 A working reference on [how to verify someone's address](https://www.idenfy.com/identity-verification-service/) when your business has a lawful reason to: nine methods ranked by how strong the resulting evidence actually is, what each one fails to prove, and how to stack two of them into a check that holds up. The dataset lives in [methods.yaml](methods.yaml) and the table is computed by [render_table.py](render_table.py).
 
