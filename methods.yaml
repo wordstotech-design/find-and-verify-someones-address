@@ -14,7 +14,7 @@
 # jurisdiction. Corrections welcome via PR.
 
 methods:
-  - name: Self-declared entry
+  - name: Self declared entry
     strength: 1
     proves: "Nothing beyond what the user typed"
     fails: "Any typo, any fabrication, no corroboration at all"
@@ -31,35 +31,35 @@ methods:
   - name: AVS check at payment
     strength: 2
     proves: "The billing address matches what the card issuer holds"
-    fails: "Stolen card used with the real billing address; partial-match codes"
+    fails: "Stolen card used with the real billing address, plus partial match codes that still let a fraudulent order through"
     basis: "Fraud prevention, legitimate interest"
     latency: "Instant, in the authorization"
 
   - name: Credit header or reference data match
     strength: 3
     proves: "A name and address pair appears together in bureau records"
-    fails: "Thin-file and recently moved users; coverage drops sharply outside major markets"
+    fails: "Thin file and recently moved users, plus coverage that drops sharply outside major markets"
     basis: "Legitimate interest, permissible purpose under local credit rules"
     latency: "Seconds, API"
 
   - name: Government or registry record
     strength: 4
     proves: "An authoritative body records this address against this person or company"
-    fails: "Registry lag after a move; access limited or closed in many jurisdictions"
-    basis: "Legal obligation, or public-register access rules"
+    fails: "Registry lag after a move, plus access limited or closed in many jurisdictions"
+    basis: "Legal obligation, or public register access rules"
     latency: "Seconds to days"
 
-  - name: Proof-of-address document
+  - name: Proof of address document
     strength: 4
     proves: "A named third party sent this person post at this address recently"
-    fails: "Edited PDFs and template forgeries; stale documents outside the date window"
+    fails: "Edited PDFs and template forgeries, plus stale documents outside the date window"
     basis: "Legal obligation under CDD"
     latency: "Seconds automated, minutes with human review"
 
   - name: Document plus identity binding
     strength: 5
     proves: "The person presenting the address document is the person named on it"
-    fails: "Coerced or complicit third party; a genuine tenant fronting for someone else"
+    fails: "Coerced or complicit third party, or a genuine tenant fronting for someone else"
     basis: "Legal obligation under CDD"
     latency: "Under a minute automated"
 
@@ -73,6 +73,6 @@ methods:
   - name: Geolocation and IP consistency
     strength: 2
     proves: "The session is consistent, or inconsistent, with the claimed location"
-    fails: "Proves the network path, never the residence; travel produces false alarms"
+    fails: "Proves the network path, never the residence, and travel produces false alarms"
     basis: "Fraud prevention, legitimate interest"
     latency: "Instant"
